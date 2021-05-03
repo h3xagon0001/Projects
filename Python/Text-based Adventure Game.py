@@ -45,6 +45,7 @@ def playGame():
     elif choice == 4:
         print("Thanks for playing!")
         input()
+        exit()
 
     else:
         print("Invalid choice")
