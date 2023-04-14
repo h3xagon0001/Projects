@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Code Clicker</title>
+        <link rel="stylesheet" href="styles.css">
+        <script defer src="scripts.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container flexbox-row">
+
+            <div>
+
+                <h1>Code Clicker</h1>
+
+                <h2>Don't forget the semicolon...</h2>
+
+                <div draggable="false" onclick="codeClicked()">
+                    <img draggable="false" src="code.png" class="code-img">
+                </div>
+
+                <p>Lines of code:</p>
+                <p id="lines">0</p>
+
+                <p>Lines per second:</p>
+                <p id="linesPerSecond">0</p>
+
+            </div>
+
+            <div class="container flexbox-column overflow-scroll">
+
+                <h1>Store</h1>
+
+                <h2>Upgrades</h2>
+                <div class="container flexbox-wrap overflow-hidden">
+                    <p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p><p>foo</p><p>bar</p>
+                </div>
+
+                <h2>Producers</h2>
+                <div class="container flexbox-row space-around producer-box">
+                    <img draggable="false" src="clicker.png" alt="Clicker" class="producer-icon">
+                    <h3>Clicker</h3>
+                    <h3>0</h3>
+                    <h3>20</h3>
+                </div>
+
+                <div class="container flexbox-row space-around producer-box">
+                    <img draggable="false" src="clicker.png" alt="Clicker" class="producer-icon">
+                    <h3>Clicker</h3>
+                    <h3>0</h3>
+                    <h3>20</h3>
+                </div>
+
+                <div class="container flexbox-row space-around producer-box">
+                    <img draggable="false" src="clicker.png" alt="Clicker" class="producer-icon">
+                    <h3>Clicker</h3>
+                    <h3>0</h3>
+                    <h3>20</h3>
+                </div>
+
+            </div>
+        </div>
+        </body>
+</html>
