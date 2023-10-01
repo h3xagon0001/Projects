@@ -1,0 +1,27 @@
+html {
+    box-sizing: border-box;
+    margin: 0.5rem;
+}
+
+.main-div {
+    width: 50vw;
+    height: 50vh;
+}
+
+.box {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.user-area {
+    width: 50%;
+    height: 100%;
+}
+
+.log {
+    width: 50%;
+    height: 100%;
+}
