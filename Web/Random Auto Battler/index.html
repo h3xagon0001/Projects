@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random Auto Battler</title>
+    <link rel="stylesheet" href="style.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');</style>
+  </head>
+  <body>
+    <!-- main div holding the three columns -->
+    <div class="flexbox">
+        <div class="flexbox column-1 flex-column">
+            <!-- combat button to toggle on/off combat -->
+            <button class="combat-button" type="button">
+                In Combat
+            </button>
+
+            <!-- area select (no level requirement because I'm lazy) -->
+            <select class="area-select-box" name="area">
+                <option value="area-1">Mondstadt</option>
+                <option value="area-2">Hardmode Jungle</option>
+                <option value="area-3">Crazed Cat Island</option>
+            </select>
+
+            <!-- level heading -->
+            <div class="flexbox level-heading">
+                <div class="level-heading-text">Level</div><div class="level-heading-text">1</div>
+            </div>
+
+            <!-- xp bar -->
+            <progress class="xp-bar" value="0" max="10"></progress>
+
+            <!-- xp indicator -->
+            <div class="flexbox xp-indicator">
+                <!-- current xp -->
+                <div class="xp-indicator-text">0</div>
+
+                <div class="xp-indicator-text">/</div>
+
+                <!-- target xp -->
+                <div class="xp-indicator-text">10</div>
+            </div>
+
+            <!-- resource box -->
+            <div class="flexbox flex-column">
+                <!-- gold -->
+                <div class="flexbox resource">
+                    <img class="resource-icon" src="assets/gold.png" alt="Gold"/>
+                    <div class="resource-label">Gold:</div>
+                    <div class="resource-amount">0</div>
+                </div>
+                
+                <!-- ore -->
+                <div class="flexbox resource">
+                    <img class="resource-icon" src="assets/ore.png" alt="Ore"/>
+                    <div class="resource-label">Ore:</div>
+                    <div class="resource-amount">0</div>
+                </div>
+                
+                <!-- tickets -->
+                <div class="flexbox resource">
+                    <img class="resource-icon" src="assets/ticket.png" alt="Tickets"/>
+                    <div class="resource-label">Tickets:</div>
+                    <div class="resource-amount">0</div>
+                </div>
+            </div>
+
+            <!-- prestige button (greyed out before certain level) -->
+            <button class="prestige-button" type="button">PRESTIGE</button>
+
+            <!-- import/export box -->
+            <div class="flexbox import-export-box">
+                <!-- import button (copies data to clipboard) -->
+                <button class="import-button" type="button">Import</button>
+
+                <!-- export button (copies data from clipboard) -->
+                <button class="export-button" type="button">Export</button>
+            </div>
+
+            <!-- import/export status box -->
+            <div class="import-export-status">Succesfully copied to clipboard!</div>
+
+            <!-- last saved x seconds ago-->
+            <div class="flexbox last-saved-box">
+                <div class="last-saved-text">Last save was</div>
+                <div class="last-saved-text">x</div>
+                <div class="last-saved-text">seconds ago.</div>
+            </div>
+        </div>
+        <div class="flexbox column-2 flex-column">
+            <!-- fight boss button -->
+            <button class="fight-boss-button" type="button">FIGHT BOSS</button>
+            
+            <!-- div holding player and enemy stat boxes -->
+            <div class="flexbox">
+                <!-- player stat box -->
+                <div class="flexbox flex-column stat-box">
+                    <!-- player name -->
+                    <div class="name-box" contenteditable="true">You</div>
+
+                    <!-- player pic and stats -->
+                    <div class="flexbox pic-stat-box">
+                        <!-- player pic -->
+                        <img class="pfp" src="assets/pfp_1.png" alt="pfp_1"/>
+
+                        <!-- box to hold the stats -->
+                        <div class="flexbox flex-column">
+                            <!-- player hp -->
+                            <div class="flexbox stat-row">
+                                <!-- max hp label -->
+                                <div>HP:</div>
+
+                                <!-- max hp amount -->
+                                <div>20</div>
+                            </div>
+
+                            <!-- player def -->
+                            <div class="flexbox stat-row">
+                                <!-- def label -->
+                                <div>DEF:</div>
+
+                                <!-- def amount -->
+                                <div>2</div>
+                            </div>
+
+                            <!-- player atk -->
+                            <div class="flexbox stat-row">
+                                <!-- atk label -->
+                                <div>ATK:</div>
+
+                                <!-- atk amount -->
+                                <div>4</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- player hp bar -->
+                    <progress class="hp-bar" value="20" max="20"></progress>
+
+                    <!-- player hp label and amount -->
+                    <div class="flexbox actual-hp-box">
+                        <div class="hp-text">HP:</div>
+                        <div class="hp-text">20</div>
+                    </div>
+                </div>
+
+                <!-- enemy stat box -->
+                <div class="flexbox flex-column stat-box">
+                    <!-- enemy name -->
+                    <div class="name-box">Anemo Slime</div>
+
+                    <!-- enemy pic and stats -->
+                    <div class="flexbox pic-stat-box">
+                        <!-- player pic -->
+                        <img class="pfp" src="assets/anemo_slime.png" alt="anemo_slime"/>
+
+                        <!-- box to hold the stats -->
+                        <div class="flexbox flex-column">
+                            <!-- enemy hp -->
+                            <div class="flexbox stat-row">
+                                <!-- max hp label -->
+                                <div>HP:</div>
+
+                                <!-- max hp amount -->
+                                <div>10</div>
+                            </div>
+
+                            <!-- player def -->
+                            <div class="flexbox stat-row">
+                                <!-- def label -->
+                                <div>DEF:</div>
+
+                                <!-- def amount -->
+                                <div>1</div>
+                            </div>
+
+                            <!-- player atk -->
+                            <div class="flexbox stat-row">
+                                <!-- atk label -->
+                                <div>ATK:</div>
+
+                                <!-- atk amount -->
+                                <div>4</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- enemy hp bar -->
+                    <progress class="hp-bar" value="10" max="10"></progress>
+
+                    <!-- enemy hp label and amount -->
+                    <div class="flexbox actual-hp-box">
+                        <div class="hp-text">HP:</div>
+                        <div class="hp-text">10</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- player skills/attacks -->
+            <div>
+
+            </div>
+
+            <!-- scrollable upgrades box -->
+            <div>
+
+            </div>
+        </div>
+        <div class="flexbox column-3 flex-column">
+            <!-- battle log -->
+            <div class="flexbox flex-column battle-log">
+                <!-- heading -->
+                <div class="battle-log-heading">
+                    Battle Log
+                </div>
+
+                <!-- battle log contents -->
+                <div class="flexbox flex-column battle-log-box">
+                    <!-- starting battle log prompt -->
+                    <div class="battle-log-text">
+                        A new adventure begins!
+                    </div>
+                    <div class="battle-log-text">
+                        Raiden Shogun slashed and did 440430 damage.
+                    </div>
+                    <div class="battle-log-text">
+                        Hutao did a charged attack and did 8440430 damage.
+                    </div>                   
+                </div>
+            </div>
+
+            <!-- description box -->
+            <div class="flexbox flex-column description-box">
+                <!-- item name/title -->
+                <div class="description-title">
+                    item name here
+                </div>
+
+                <!-- actual item description -->
+                <div class="description-text">
+                    Does 100% of your ATK as damage every 5 seconds 
+                    Increase damage 50% per level
+                    Every 3rd attack does 500% damage with 10% to crit for 2000% damage as pyro damage if you are under half hp
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
