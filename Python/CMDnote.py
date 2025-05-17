@@ -1,17 +1,14 @@
-# features I might add:
+# features to add:
 # scrollable terminal
 # delete key
 # open/load existing file
 
 import blessed
 import os
-import pyautogui
 
 terminal = blessed.Terminal()
 
-content = [
-    ""
-]
+content = [""]
 
 filename = "untitled"
 terminalWidth = 0
@@ -27,7 +24,7 @@ def refreshTerminal():
     global filename
     global mode
 
-    # clear screen, idk what this does tbh
+    # clear screen
     os.system("cls")
     print(terminal.home + terminal.clear)
 
