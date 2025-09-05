@@ -335,7 +335,7 @@ def readData(extractedContent: dict):
     for spark in extractedContent["sparks"]["stats"]:
         output += spark + "\n"
     output += "\n"
-    output += "Aptitude:"
+    output += "Aptitude:\n"
     for spark in extractedContent["sparks"]["aptitude"]:
         output += spark + "\n"
     output += "\n"
