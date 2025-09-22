@@ -1,3 +1,5 @@
+// please solder back the white wire
+
 #include <SPI.h>
 #include <RF24.h>
 #include <nRF24L01.h>
@@ -10,22 +12,34 @@
 #define RIGHT_CE 25
 #define RIGHT_CSN 26
 
+SPIClass *vspi_pointer = nullptr;
+SPIClass *hspi_pointer = nullptr;
+
+// init radios
 RF24 leftRadio(LEFT_CE, LEFT_CSN);
 RF24 rightRadio(RIGHT_CE, RIGHT_CSN);
 
-
+// dummy address
 const byte address[6] = "00001";
 
 void setup() {
   // put your setup code here, to run once:
+
+  // init vspi and hspi
+  vspi_pointer = new SPIClass(VSPI);
+  hspi_pointer = new SPIClass(HSPI);
+  
+  vspi_pointer->begin();
+  hspi_pointer->begin();
+
   Serial.begin(115200);
 
-  if (!leftRadio.begin()) {
+  if (!leftRadio.begin(vspi_pointer)) {
     Serial.println("Radio left hardware not responding!");
     while (1) {} // Hold program in infinite loop
   }
 
-  if (!rightRadio.begin()) {
+  if (!rightRadio.begin(hspi_pointer)) {
     Serial.println("Radio right hardware not responding!");
     while (1) {} // Hold program in infinite loop
   }
