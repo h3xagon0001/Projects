@@ -52,8 +52,8 @@ void setup() {
   rightRadio.setRetries(0, 0);
   leftRadio.setPALevel(RF24_PA_MAX, false);
   rightRadio.setPALevel(RF24_PA_MAX, false);
-  leftRadio.setDataRate(RF24_2MBPS);
-  rightRadio.setDataRate(RF24_2MBPS);
+  leftRadio.setDataRate(RF24_250KBPS);
+  rightRadio.setDataRate(RF24_250KBPS);
   leftRadio.printPrettyDetails();
   rightRadio.printPrettyDetails();
   
@@ -63,12 +63,6 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  leftRadio.setChannel(random(126));
-  rightRadio.setChannel(random(126));
+  leftRadio.setChannel(random(81));
+  rightRadio.setChannel(random(81));
 }
-
-
-
-
-
-
