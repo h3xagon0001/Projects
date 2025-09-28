@@ -1,5 +1,3 @@
-// please solder back the white wire
-
 #include <SPI.h>
 #include <RF24.h>
 #include <nRF24L01.h>
@@ -16,8 +14,8 @@ SPIClass *vspi_pointer = nullptr;
 SPIClass *hspi_pointer = nullptr;
 
 // init radios
-RF24 leftRadio(LEFT_CE, LEFT_CSN);
-RF24 rightRadio(RIGHT_CE, RIGHT_CSN);
+RF24 leftRadio(LEFT_CE, LEFT_CSN, 16000000);
+RF24 rightRadio(RIGHT_CE, RIGHT_CSN, 16000000);
 
 void setup() {
   // put your setup code here, to run once:
