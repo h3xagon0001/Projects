@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>GoChat</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>    
+        <div style="display: flex;flex-direction: column;">
+            <div id="inputs">
+                <form onsubmit="handleSubmit(event)" method="post">
+                    <input id="username" type="text" name="username" placeholder="username" required>
+                    <input id="message" type="text" name="message" placeholder="what's on your mind ?" required>
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+            <div id="messages" style="display: flex;flex-direction: column-reverse;"></div>
+        </div>
+        <script>
+            const websocket = new WebSocket("ws://192.168.68.106:1337/ws");
+
+            function handleSubmit(e) {
+                e.preventDefault();
+                websocket.send(JSON.stringify({
+                    "username": e.target.username.value,
+                    "message": e.target.message.value
+                }))
+                e.target.message.value = ""
+            }
+
+            websocket.onmessage = function (event) {
+                const message = JSON.parse(event.data)
+                messages.innerHTML += `<p><b>${message.username}:</b>  ${message.message}</p>`
+            }
+
+            websocket.onmessage = function (event) {
+                const chat = JSON.parse(event.data)
+                messages.innerHTML = chat
+            }
+        </script>
+    </body>
+</html>
