@@ -1,4 +1,5 @@
 import json
+import os
 
 class treeNode:
     def __init__(self, data: tuple[str, int, str]):
@@ -77,13 +78,44 @@ padding = 8 - (len(encodedData) % 8)
 if len(encodedData) % 8 != 0:
     for i in range(8 - (len(encodedData) % 8)):
         encodedData += "0"
-    
+
 keyDict["padding"] = padding
 
 with open("encoded.bin", "wb") as file:
     for i in range(0, len(encodedData), 8):
-        file.write(bytes([int(encodedData[i:i+8], 2)]))
+        file.write(int(encodedData[i:i+8], 2).to_bytes())
 
 
 with open("keys.json", "wt") as file:
     file.write(json.dumps(keyDict))
+
+uncompressedSize = os.path.getsize("input.txt")
+compressedSize = os.path.getsize("encoded.bin")
+keySize = os.path.getsize("keys.json")
+
+print(f"""
+Uncompressed size: {uncompressedSize} bytes
+Compressed size: {compressedSize} bytes ({round(compressedSize / uncompressedSize * 100, 1)}%)
+With keys: {compressedSize + keySize} bytes ({round((compressedSize + keySize) / uncompressedSize * 100, 1)}%)
+""")
+
+keyDict = {}
+with open("keys.json", "rt") as file:
+    keyDict = json.loads(file.read())
+
+with open("decoded.txt", "wt") as file:
+    buffer = ""
+    toWrite = ""
+    content = "0"
+    with open("encoded.bin", "rb") as encodedFile:
+        for byte in encodedFile.read():
+            content += bin(byte)[2:]
+
+    for bit in content:
+        buffer += bit
+
+        if buffer in list(keyDict):
+            toWrite += keyDict[buffer]
+            buffer = ""
+
+    file.write(toWrite)
