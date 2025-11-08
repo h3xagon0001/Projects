@@ -7,7 +7,8 @@ class Individual:
             savings: int = 0,
             income: int = 0,
             needs: int = 0,
-            wants: int = 0
+            wants: int = 0,
+            inHousehold: bool = False
     ):
         self.age        = age
         self.wallet     = wallet
@@ -15,6 +16,7 @@ class Individual:
         self.income     = income
         self.needs      = needs
         self.wants      = wants
+        self.inHousehold= False
         
 
 
@@ -26,6 +28,7 @@ class Individual:
             return True
         else:
             return False
+        
 
 class Household:
     def __init__(self, members: list[Individual], savings: int=0):
@@ -44,14 +47,67 @@ class Government:
         self.budget         = budget
         self.taxRate        = taxRate
         self.interestRate   = interestRate
-        
 
-a = Individual(savings=100)
-b = Individual(savings=150)
+def getMonthlyHouseholdPercentage(individualOne: Individual, individualTwo: Individual):
+    # try to only change the coefficient
+    coefficient = 0.05
+    target = 45
+    return coefficient * (individualOne.income + individualTwo.income) ** (1 / 2.5) - 0.075 * abs(target - (individualOne.age + individualTwo.age) / 2)
 
-print(a.savings, b.savings)
-c = Household(members=[a, b])
-print(c.members)
-print(c.savings)
+def formHousehold(population: list[Individual], individual: Individual):
+    # check is they have a job or already in household or below 18
+    if individual.income == 0 or individual.inHousehold or individual.age < 18:
+        return None
 
-print(a.savings, b.savings)
+    candidate = random.choice(population)
+
+    # check if self
+    # check if they have a job
+    # check if they are in a household
+    # check if they are 18
+    if (
+        candidate == individual or
+        candidate.income == 0 or
+        candidate.inHousehold or
+        candidate.age < 18
+    ):
+        return None
+
+    if random.uniform(0, 100) < getMonthlyHouseholdPercentage(individual, candidate):
+        return candidate
+
+    else:
+        return None
+
+population: list[Individual] = []
+
+for i in range(1000):
+    population.append(Individual(age=random.randint(0,10), income = round(random.triangular(1700, 4000))))
+
+householdFormed = 0
+formingAge = 0
+
+for year in range(100):
+    for month in range(12):
+        if len(population) == 0: break
+
+        for individual in population:
+            candidate = formHousehold(population, individual)
+            if candidate != None:
+                a = Household([individual, candidate])
+                print(a.members, individual.age, candidate.age)
+                individual.inHousehold = True
+                candidate.inHousehold = True
+                
+                householdFormed += 1
+                formingAge += individual.age
+                formingAge += candidate.age
+
+            if individual.isDead():
+                population.remove(individual)
+                
+    for individual in population:
+        individual.age += 1
+
+print("Households formed: ", householdFormed)
+print("Average forming age: ", formingAge / (householdFormed * 2))
