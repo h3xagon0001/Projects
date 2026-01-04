@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+
+	struct organism {
+		const char* name;
+		const int population;
+		const int consumptionPerIndividual;
+		const char* consumes[4];
+	};
+
+	#define ORGANISM_COUNT 5
+
+	struct organism ecosystem[ORGANISM_COUNT] = {
+		{"Algae", 100000, 0, {}},
+		{"Crab", 30000, 10, {"Algae"}},
+		{"Shrimp", 25000, 8, {"Algae"}},
+		{"Snapper", 4000, 5, {"Shrimp", "Crab"}},
+		{"Heron", 350, 4, {"Snapper", "Crab"}}
+	};
+
+	for (int i = 0; i < ORGANISM_COUNT; i++) {
+		printf("Name: %8s    ", ecosystem[i].name);
+		printf("Population: %8i    ", ecosystem[i].population);
+		printf("CPI: %4i", ecosystem[i].consumptionPerIndividual);
+		printf("\n");
+	}
+
+	return 0;
+
+}
+
