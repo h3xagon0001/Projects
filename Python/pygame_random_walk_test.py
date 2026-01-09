@@ -9,7 +9,7 @@ deltaTime = 0
 
 particleList: list[pygame.Vector2] = []
 
-for i in range(1000):
+for i in range(10000):
     particleList.append(pygame.Vector2(
         x = random.randint(0, 500),
         y = random.randint(0, 500)
@@ -36,10 +36,10 @@ while running:
         elif particle.y > screen.get_width():
             particle.y = 0
 
-        pygame.draw.circle(screen, "white", particle, 5)
+        pygame.draw.circle(screen, "white", particle, 1)
 
     pygame.display.flip()
 
-    deltaTime = clock.tick(30) / 1000
+    deltaTime = clock.tick(60) / 1000
 
 pygame.quit()
